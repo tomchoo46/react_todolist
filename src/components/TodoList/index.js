@@ -5,7 +5,15 @@ const TodoList = (props) => {
         <ul>
           {props.todolist.map((todo, i) => {
             return (
-              <li key={i}>{todo}</li>
+              <li key={i}>
+                {todo} 
+                <button onClick={(e) => {
+                    e.preventDefault()
+                    props.deleteTask(i)
+                }}>
+                    Delete
+                </button>
+            </li>
             )
           })}
         </ul>
