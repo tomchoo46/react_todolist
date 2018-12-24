@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { Component }  from 'react';
 
-const TodoList = (props) => {
-    return (
-        <ul>
-          {props.todolist.map((todo, i) => {
-            return (
-              <li key={i}>
-                {todo} 
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    props.deleteTask(i)
-                }}>
-                    Delete
-                </button>
-            </li>
-            )
-          })}
-        </ul>
-    )
+class TodoList extends Component { // need to use component to access ref
+    
+    render(){
+        return (
+            <ul>
+              {this.props.todolist.map((task, i) => {
+                return (
+                  <li key={i}>
+                    <span contentEditable="true"
+                        ref="task"
+                        onBlur={(e) => {
+                            this.props.updateTask(i, e.target.textContent)
+                        }}>
+                        {task}
+                    </span>
+                    <button onClick={(e) => {
+                        e.preventDefault()
+                        this.props.deleteTask(i)
+                    }}>
+                        Delete
+                    </button>
+                </li>
+                )
+              })}
+            </ul>
+        )    
+    }
 }
 
 export default TodoList
