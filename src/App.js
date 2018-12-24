@@ -7,14 +7,14 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      todolist: ['1','2','32']
+      todolist: ['todo3','todo2','todo1']
     }
     this.addTask = this.addTask.bind(this)
   }
 
   addTask(todo){
     this.setState({
-      todolist: [...this.state.todolist, todo]
+      todolist: [todo, ...this.state.todolist]
     })
   }
 
