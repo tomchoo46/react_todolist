@@ -7,11 +7,16 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      todolist: ['task3','task2','task1']
+      todolist: [
+        {name: 'task3', done: false},
+        {name: 'task2', done: false},
+        {name: 'task1', done: false},
+      ]
     }
     this.addTask = this.addTask.bind(this)
     this.deleteTask = this.deleteTask.bind(this)
     this.updateTask = this.updateTask.bind(this)
+    this.toggleCheck = this.toggleCheck.bind(this)
   }
 
   addTask(task){
@@ -31,10 +36,18 @@ class App extends Component {
 
   updateTask(i, value){
     let todolistArray = [...this.state.todolist]
-    todolistArray[i] = value
+    todolistArray[i].name = value
     this.setState({
       todolist: [...todolistArray]
     })
+  }
+
+  toggleCheck(e, i){
+    let todolistArray = [...this.state.todolist]
+    todolistArray[i].done = e.target.checked
+    this.setState({
+      todolist: [...todolistArray]
+    })    
   }
 
   render() {
@@ -44,7 +57,8 @@ class App extends Component {
         <TodoForm addTask={this.addTask}/>
         <TodoList todolist={this.state.todolist}
           deleteTask={this.deleteTask}
-          updateTask={this.updateTask} />
+          updateTask={this.updateTask}
+          toggleCheck={this.toggleCheck} />
       </div>
     );
   }
